@@ -9,10 +9,17 @@ module.exports = {
 
     async store(req, res) {
 
+        var partners
         var updatedPartners
-
+        var responsePartners
         const newPartner = req.body
-        const partners = await Partner.find({}).sort("-participation");
+
+        try {
+            partners = await Partner.find({}).sort("-participation");
+        }
+        catch(error) {
+            return res.status(400).send(error)
+        }
 
         const totalQuota = partners.reduce((prevVal, partner) => prevVal + partner.participation, 0);
 
@@ -28,22 +35,38 @@ module.exports = {
 
         updatedPartners.push(newPartner)
         
-        const serverPartners = await Partner.insertMany(updatedPartners)
-        
-        req.io.emit("NewPartner", serverPartners);
+        try{
+            responsePartners = await Partner.insertMany(updatedPartners)
+        }
+        catch(error){
+            return res.status(400).send(error)
+        }
 
-        return res.json(serverPartners);
+        req.io.emit("NewPartner", responsePartners);
+
+        return res.json(responsePartners);
     
     },
 
     async delete(req, res) {
-    
-        const partner = await Partner.findById(req.params.id);
+        var partner
+
+        try{
+            partner = await Partner.findById(req.params.id);
+        }
+        catch(error) {
+            return res.status(400).send(error)
+        }
 
         partner.delete();
         req.io.emit("RemovePartner", partner);
 
-        await partner.save();
+        try {
+            await partner.save();
+        }
+        catch(error){
+            return res.status(400).send(error)
+        }
 
         return res.json(partner);
 
