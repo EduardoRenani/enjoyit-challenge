@@ -13,12 +13,12 @@ export class WebsocketService {
 
   constructor() {}
 
-  public initSocket(){
+  public initSocket() {
     this.socket = io(this.url);
   }
 
   public onEvent(event: string): Observable<any> {
-    return new Observable<string>(observer => {
+    return new Observable<any>(observer => {
         this.socket.on(event, (data: any) => observer.next(data));
     });
   }

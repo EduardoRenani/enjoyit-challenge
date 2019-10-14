@@ -11,8 +11,7 @@ import { WebsocketService } from '../../websocket.service';
 })
 export class PartnersTableComponent implements OnInit {
 
-  partners: Partner[] = [];
-  partnersTableDataSource = new MatTableDataSource<Partner>(this.partners);
+  partnersTableDataSource = new MatTableDataSource<Partner>();
   displayedColumns: string[] = [
     'name',
     'surname',
@@ -20,9 +19,9 @@ export class PartnersTableComponent implements OnInit {
   ];
 
   loadPartners() {
-    this.httpClient.get('http://localhost:3000/partners').toPromise()
+    this.httpClient.get<Partner[]>('http://localhost:3000/partners').toPromise()
     .then( data => {
-      this.partnersTableDataSource = data
+      this.partnersTableDataSource.data = data;
     })
     .catch( err => {
       console.log(err);
