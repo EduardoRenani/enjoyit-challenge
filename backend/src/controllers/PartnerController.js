@@ -19,7 +19,7 @@ module.exports = {
     async store(req, res) {
 
         var partners = []
-        var updatedPartners = []
+        var updateOperator
         var newPartner = req.body
         
         //throw on invalid input
@@ -43,19 +43,17 @@ module.exports = {
         }
 
         const totalQuota = partners.reduce((prevVal, partner) => prevVal + partner.participation, 0);
-        
         if (newPartner.participation > (100 - totalQuota)) {
-            updatedPartners = partners.map(function(partner) {
-                const updatedPartner = partner.participation - (partner.participation * newPartner.participation)
-                return updatedPartner
-            })
+            updateOperator = (100-newPartner.participation)/100
         }
         else {
-            updatedPartners = partners
+            updateOperator = 1
         }
 
         try{
-            await Partner.updateMany(updatedPartners)
+            console.log(updateOperator)
+            const res = await Partner.updateMany({}, { $mul : {participation: updateOperator} } );
+            console.log(res.n)
             await Partner.create(newPartner)
         }
         catch(error){

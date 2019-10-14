@@ -15,13 +15,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 
+
 import { WebsocketService } from './websocket.service';
+import { ChartsModule, WavesModule } from 'angular-bootstrap-md';
+import { PartnerChartComponent } from './components/partner-chart/partner-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PartnersTableComponent,
-    PartnerFormComponent
+    PartnerFormComponent,
+    PartnerChartComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +39,8 @@ import { WebsocketService } from './websocket.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ChartsModule,
+    WavesModule,
   ],
   providers: [WebsocketService],
   bootstrap: [AppComponent]
