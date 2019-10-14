@@ -51,9 +51,7 @@ module.exports = {
         }
 
         try{
-            console.log(updateOperator)
-            const res = await Partner.updateMany({}, { $mul : {participation: updateOperator} } );
-            console.log(res.n)
+            await Partner.updateMany({}, { $mul : {participation: updateOperator} } );
             await Partner.create(newPartner)
         }
         catch(error){
