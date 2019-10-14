@@ -36,7 +36,8 @@ export class PartnerChartComponent implements OnInit {
     const bgColors = Array(participations.length).fill(colorSet);
     const flattenedColorArray = [].concat(...bgColors);
 
-    this.chart = new Chart('partnerChart', {
+    const canvas = document.getElementById("partnerChart") as HTMLCanvasElement;
+    this.chart = new Chart(canvas, {
       type: 'doughnut',
       data: {
         datasets: [{
@@ -54,26 +55,62 @@ export class PartnerChartComponent implements OnInit {
     });
   }
 
-  loadChartData() {
+  updateChart(data) {
+    const participations = data.map((partner) => {
+      return partner.participation;
+    });
+    const names = data.map((partner) => {
+      return partner.name;
+    });
+    const colorSet = [
+      'rgb(0,63,92)',
+      'rgb(88,80,141)',
+      'rgb(188,80,144)',
+      'rgb(255,99,97)',
+      'rgb(255,166,0)'
+    ];
+    const bgColors = Array(participations.length).fill(colorSet);
+    const flattenedColorArray = [].concat(...bgColors);
+
+    this.chart.data.datasets[0].data = participations;
+    this.chart.data.datasets[0].backgroundColor = flattenedColorArray;
+    this.chart.data.labels = names;
+    this.chart.update();
+  }
+
+  loadChartData(callback) {
     this.httpClient.get<Partner[]>('http://localhost:3000/partners').toPromise()
     .then( data => {
-      this.drawChart(data);
+      callback(data);
     })
     .catch( err => {
-      console.log(err);
+      throw err;
     });
   }
 
   constructor(private httpClient: HttpClient, private ws: WebsocketService) { }
 
   ngOnInit() {
-    this.loadChartData();
+    try {
+      this.loadChartData( (data) => {
+        this.drawChart(data);
+      });
+    } catch (err) {
+      alert(err);
+    }
+
 
     this.ws.initSocket();
     this.ws
     .onEvent('NewPartner')
     .subscribe((partner: any) => {
-      this.loadChartData();
+      try {
+        this.loadChartData( (data) => {
+          this.updateChart(data);
+        });
+      } catch (err) {
+        alert(err);
+      }
     });
   }
 
