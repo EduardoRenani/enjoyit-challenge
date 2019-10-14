@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { Partner } from '../../models/Partner';
 import { MatTableDataSource } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
@@ -18,28 +18,39 @@ export class PartnersTableComponent implements OnInit {
     'participation',
   ];
 
-  loadPartners() {
+  loadPartners(callback) {
     this.httpClient.get<Partner[]>('http://localhost:3000/partners').toPromise()
     .then( data => {
-      this.partnersTableDataSource.data = data;
+      callback(data);
     })
     .catch( err => {
-      console.log(err);
+      throw ErrorHandler;
     });
   }
 
   constructor(private ws: WebsocketService, private httpClient: HttpClient) { }
 
   ngOnInit() {
-
-    this.loadPartners();
+    try {
+      this.loadPartners( (data) => {
+        this.partnersTableDataSource.data = data;
+      });
+    } catch (err) {
+      alert(err);
+    }
 
 
     this.ws.initSocket();
     this.ws
     .onEvent('NewPartner')
     .subscribe((partner: any) => {
-      this.loadPartners();
+      try {
+        this.loadPartners( (data) => {
+          this.partnersTableDataSource.data = data;
+        });
+      } catch (err) {
+        alert(err);
+      }
     });
 
     }

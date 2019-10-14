@@ -13,7 +13,7 @@
     </ng-container>
     <ng-container matColumnDef="participation">
         <th mat-header-cell *matHeaderCellDef> Participation </th>
-        <td mat-cell *matCellDef="let element"> {{element.participation}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.participation.toFixed(2)+"%"}} </td>
     </ng-container>
 
 </table>
