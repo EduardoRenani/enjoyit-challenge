@@ -9,14 +9,14 @@ var constraints = {
   surname: {
     presence: true,
     format: {
-      pattern: /[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/,
+      pattern: /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/,
       message: "input is not a valid surname",
     }
   },
   participation: {
     presence: true,
     format: {
-      pattern: /^(((1[0-9][0-9])(\.0+)?|([0-9][0-9](\.[0-9]+)?)|([1-9](\.[0-9]+)?))%?|(0+(\.[0-9]*[1-9]+))%?|(0\.[0-9]+[1-9]+))$/, // aceita 0 < numero < 100 com ou sem % ou em forma fracionaria.
+      pattern: /^(((1[0-9][0-9])(\.0+)?|([0-9][0-9](\.[0-9]+)?)|([1-9](\.[0-9]+)?))%?|(0+(\.[0-9]*[1-9]+))%?|(0\.[0-9]+[1-9]+))$/, 
       message: "input is not a valid percentage number"
     }
   },
