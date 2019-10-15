@@ -1,0 +1,46 @@
+
+
+.form-container {
+  background-color: rgb(0,184,226);
+}
+button:disabled {
+  color: gray;
+}
+button:enabled {
+  color: white;
+  border-color: white;
+}
+
+.mat-grid-list {
+  width: 60%;
+  left: 20%;
+  right: 20%;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0.5em 0 0.5em 0;
+}
+.mat-form-field-outline {
+  background-color: rgb(255,255,255);
+  color: rgb(255,255,255);
+
+}
+
+.mat-form-field-outline > * {
+  background-color: rgb(255,255,255);
+  color: rgb(255,255,255);
+
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.mat-form-field-subscript-wrapper {
+  margin-top: 12%;
+}
+
+.mat-input-element {
+  font-size: 75%;
+  float: left;
+}
