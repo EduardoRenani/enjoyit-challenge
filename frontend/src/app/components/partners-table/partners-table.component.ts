@@ -13,6 +13,7 @@ export class PartnersTableComponent implements OnInit {
 
   partnersTableDataSource = new MatTableDataSource<Partner>();
   displayedColumns: string[] = [
+    'No',
     'name',
     'surname',
     'participation',

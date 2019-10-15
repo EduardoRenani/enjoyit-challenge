@@ -23,8 +23,8 @@ export class PartnerChartComponent implements OnInit {
     const participations = data.map((partner) => {
       return partner.participation;
     });
-    const names = data.map((partner) => {
-      return partner.name;
+    const labelNames = data.map((partner) => {
+      return partner.name + ' ' + partner.surname;
     });
     const colorSet = [
       'rgb(0,63,92)',
@@ -36,7 +36,7 @@ export class PartnerChartComponent implements OnInit {
     const bgColors = Array(participations.length).fill(colorSet);
     const flattenedColorArray = [].concat(...bgColors);
 
-    const canvas = document.getElementById("partnerChart") as HTMLCanvasElement;
+    const canvas = document.getElementById('partnerChart') as HTMLCanvasElement;
     this.chart = new Chart(canvas, {
       type: 'doughnut',
       data: {
@@ -45,11 +45,15 @@ export class PartnerChartComponent implements OnInit {
             backgroundColor: flattenedColorArray,
             borderColor: 'rgb(255, 255, 255)',
         }],
-        labels: names,
+        labels: labelNames,
       },
       options: {
         legend: {
-          display: false
+          display: true,
+          position: 'right',
+          labels: {
+            boxWidth: 20,
+          },
         }
       }
     });
@@ -59,8 +63,8 @@ export class PartnerChartComponent implements OnInit {
     const participations = data.map((partner) => {
       return partner.participation;
     });
-    const names = data.map((partner) => {
-      return partner.name;
+    const labelNames = data.map((partner) => {
+      return partner.name + ' ' + partner.surname;
     });
     const colorSet = [
       'rgb(0,63,92)',
@@ -69,12 +73,13 @@ export class PartnerChartComponent implements OnInit {
       'rgb(255,99,97)',
       'rgb(255,166,0)'
     ];
+
     const bgColors = Array(participations.length).fill(colorSet);
     const flattenedColorArray = [].concat(...bgColors);
 
     this.chart.data.datasets[0].data = participations;
     this.chart.data.datasets[0].backgroundColor = flattenedColorArray;
-    this.chart.data.labels = names;
+    this.chart.data.labels = labelNames;
     this.chart.update();
   }
 

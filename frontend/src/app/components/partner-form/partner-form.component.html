@@ -1,24 +1,35 @@
-<div class="example-container">
+<div class="form-container">
 
-  <form [formGroup]="partnerForm" (ngSubmit)="submitHandler()">
-      <mat-form-field floatLabel="never" hideRequiredMarker>
-          <input matInput placeholder="Name" formControlName="name" required>
+  <form class="partner-form" [formGroup]="partnerForm" (ngSubmit)="submitHandler()">
+    <mat-grid-list cols="4" rowHeight="100px" gutterSize="5px">
+      <mat-grid-tile>
+        <mat-form-field appearance="outline" floatLabel="never" hideRequiredMarker>
+            <input matInput placeholder="Name" formControlName="name" required>
+            <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline" floatLabel="never" hideRequiredMarker>
+          <input matInput placeholder="Surname" formControlName="surname" required>
           <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
+        </mat-form-field>
+      </mat-grid-tile>
 
-      <mat-form-field floatLabel="never" hideRequiredMarker>
-        <input matInput placeholder="Surname" formControlName="surname" required>
-        <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
+      <mat-grid-tile>
+        <mat-form-field appearance="outline" floatLabel="never" hideRequiredMarker>
+            <input matInput placeholder="Participation" formControlName="participation" required>
+            <mat-error *ngIf="percentage.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
 
-      <mat-form-field floatLabel="never" hideRequiredMarker>
-          <input matInput placeholder="Participation" formControlName="participation" required>
-          <mat-error *ngIf="percentage.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
+      <mat-grid-tile>
+          <button mat-button style="width: 60%; border-radius: 0px; border-style: solid; border-width: 1px; line-height: 42px;" type="submit" [disabled]="partnerForm.invalid">
+              SEND
+            </button>
+      </mat-grid-tile>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="partnerForm.invalid">
-        SEND
-      </button>
+    </mat-grid-list>
   </form>
 
 </div>

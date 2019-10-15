@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-partner-form',
   templateUrl: './partner-form.component.html',
-  styleUrls: ['./partner-form.component.css']
+  styleUrls: ['./partner-form.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PartnerFormComponent implements OnInit {
 

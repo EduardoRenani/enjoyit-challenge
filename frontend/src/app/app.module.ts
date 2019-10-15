@@ -12,9 +12,7 @@ import { PartnerFormComponent } from './components/partner-form/partner-form.com
 import { MatButtonModule, MatFormField, MatFormFieldModule, MatInput, MatInputModule, MatSelectModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { Observable } from 'rxjs';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import { WebsocketService } from './websocket.service';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md';
@@ -41,6 +39,7 @@ import { PartnerChartComponent } from './components/partner-chart/partner-chart.
     HttpClientModule,
     ChartsModule,
     WavesModule,
+    MatGridListModule,
   ],
   providers: [WebsocketService],
   bootstrap: [AppComponent]
