@@ -15,7 +15,7 @@ $ cd ./frontend
 $ ng serve --port <port>
 
 ```
-#### Now you can use your browser to access http://localhost:&lt;port&gt; and see the results.
+#### Now you can use your browser to access localhost:&lt;port&gt; and see the results.
 
 
 # Running test cases:
