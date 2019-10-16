@@ -18,7 +18,7 @@ $ ng serve --port <port>
 
 ```
 
-### Now you can use your browser to access http://localhost:\<port> and see the results.
+### Now you can use your browser to access http://localhost:<port> and see the results.
 
 
 # Running test cases:
