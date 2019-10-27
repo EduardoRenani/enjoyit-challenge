@@ -20,7 +20,7 @@ export class PartnersTableComponent implements OnInit {
   ];
 
   loadPartners(callback) {
-    this.httpClient.get<Partner[]>('http://localhost:3000/partners').toPromise()
+    this.httpClient.get<Partner[]>('https://enjoyit-challenge.herokuapp.com/partners').toPromise()
     .then( data => {
       callback(data);
     })

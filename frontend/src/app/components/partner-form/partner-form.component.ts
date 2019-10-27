@@ -79,7 +79,7 @@ export class PartnerFormComponent implements OnInit {
 
     const formValue = this.partnerForm.value;
 
-    this.httpClient.post('http://localhost:3000/partners', formValue).toPromise()
+    this.httpClient.post('https://enjoyit-challenge.herokuapp.com/partners', formValue).toPromise()
     .then( data => {
       //console.log(data);
       this.success = true;
