@@ -3,6 +3,22 @@ const partnerConstraints = require("../validate/constraints/partner")
 var validate = require("validate.js");
 
 module.exports = {
+    async empty(req, res) {
+        var result
+
+        try {
+            result = await Partner.deleteMany(); 
+        }
+        catch(error) {
+            return res.status(400).send(error)
+        }
+
+        req.io.emit("UpdateDB");
+
+        return res.json(result);
+
+    },
+
     async index(req, res){
         var partners
 
@@ -58,7 +74,7 @@ module.exports = {
             return res.status(400).send(error)
         }
 
-        req.io.emit("NewPartner", newPartner);
+        req.io.emit("UpdateDB", newPartner);
 
         return res.json(newPartner);
     
@@ -75,7 +91,7 @@ module.exports = {
         }
 
         partner.delete();
-        req.io.emit("RemovePartner", partner);
+        req.io.emit("UpdateDB", partner);
 
         return res.json(partner);
 

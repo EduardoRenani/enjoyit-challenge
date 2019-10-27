@@ -6,5 +6,6 @@ const PartnerController = require("./controllers/PartnerController");
 
 routes.get("/partners", PartnerController.index);
 routes.post("/partners", PartnerController.store);
+routes.delete("/partners", PartnerController.empty);
 
 module.exports = routes;

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 
 export class WebsocketService {
 
-  private url = 'https://enjoyit-challenge.herokuapp.com';
+  private url = 'http://localhost:3000';
   private socket;
 
   constructor() {}

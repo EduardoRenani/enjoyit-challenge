@@ -17,13 +17,15 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { WebsocketService } from './websocket.service';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md';
 import { PartnerChartComponent } from './components/partner-chart/partner-chart.component';
+import { EmptyDatabaseComponent } from './components/empty-database/empty-database.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PartnersTableComponent,
     PartnerFormComponent,
-    PartnerChartComponent
+    PartnerChartComponent,
+    EmptyDatabaseComponent
   ],
   imports: [
     BrowserModule,
