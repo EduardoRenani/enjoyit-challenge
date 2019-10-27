@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { ApiService } from '../../api.service';
 @Component({
   selector: 'app-empty-database',
   templateUrl: './empty-database.component.html',
@@ -8,17 +7,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EmptyDatabaseComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
   }
 
   async emptyDatabase() {
+    try {
+      this.api.getPartners( (data) => {
 
-    this.httpClient.delete('http://localhost:3000/partners').toPromise()
-    .catch( err => {
-      console.log(err);
-    });
+      });
+    } catch (err) {
+      alert(err);
+    }
   }
 
 }

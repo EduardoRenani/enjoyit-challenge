@@ -29,5 +29,15 @@ export class ApiService {
       throw err;
     });
   }
+
+  public deleteAllPartners(callback) {
+    this.httpClient.delete(environment.backendUrl + '/partners').toPromise()
+    .then( data => {
+      callback(data);
+    })
+    .catch( err => {
+      throw err;
+    });
+  }
 }
 

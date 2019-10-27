@@ -1,7 +1,6 @@
 import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { Partner } from '../../models/Partner';
 import { MatTableDataSource } from '@angular/material';
-import { HttpClient } from '@angular/common/http';
 import { WebsocketService } from '../../websocket.service';
 import { ApiService } from '../../api.service';
 

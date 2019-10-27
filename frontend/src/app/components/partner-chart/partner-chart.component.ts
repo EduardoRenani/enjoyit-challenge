@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-import { Partner } from '../../models/Partner';
-import { HttpClient } from '@angular/common/http';
-import { DateAdapter } from '@angular/material';
-import { partition } from 'rxjs';
-import { FasDirective } from 'angular-bootstrap-md';
 import { WebsocketService } from '../../websocket.service';
 import { ApiService } from '../../api.service';
 
