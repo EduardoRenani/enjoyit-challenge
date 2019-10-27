@@ -1,5 +1,8 @@
 # Enjoyit-challenge
 
+## Deployed at
+
+https://eduardorenani.github.io/enjoyit-challenge/
 
 ## Running the website locally
 
