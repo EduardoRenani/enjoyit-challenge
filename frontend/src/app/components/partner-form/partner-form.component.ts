@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../../api.service';
 import { ViewEncapsulation } from '@angular/core';
 
 @Component({
@@ -41,7 +42,7 @@ export class PartnerFormComponent implements OnInit {
           '';
   }
 
-  constructor(private fb: FormBuilder, private httpClient: HttpClient) { }
+  constructor(private fb: FormBuilder, private api: ApiService) { }
 
   ngOnInit() {
     this.partnerForm = this.fb.group({
@@ -79,14 +80,13 @@ export class PartnerFormComponent implements OnInit {
 
     const formValue = this.partnerForm.value;
 
-    this.httpClient.post('http://localhost:3000/partners', formValue).toPromise()
-    .then( data => {
-      //console.log(data);
-      this.success = true;
-    })
-    .catch( err => {
-      console.log(err);
-    });
+    try {
+      this.api.postPartners(formValue, (data) => {
+        this.success = true;
+      });
+    } catch (err) {
+      alert(err);
+    }
 
     this.loading = false;
 

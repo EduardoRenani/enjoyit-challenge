@@ -3,6 +3,7 @@ import { Partner } from '../../models/Partner';
 import { MatTableDataSource } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { WebsocketService } from '../../websocket.service';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-partners-table',
@@ -19,34 +20,24 @@ export class PartnersTableComponent implements OnInit {
     'participation',
   ];
 
-  loadPartners(callback) {
-    this.httpClient.get<Partner[]>('http://localhost:3000/partners').toPromise()
-    .then( data => {
-      callback(data);
-    })
-    .catch( err => {
-      throw ErrorHandler;
-    });
-  }
-
-  constructor(private ws: WebsocketService, private httpClient: HttpClient) { }
+  constructor(private ws: WebsocketService, private api: ApiService) { }
 
   ngOnInit() {
+
     try {
-      this.loadPartners( (data) => {
+      this.api.getPartners( (data) => {
         this.partnersTableDataSource.data = data;
       });
     } catch (err) {
       alert(err);
     }
 
-
     this.ws.initSocket();
     this.ws
     .onEvent('UpdateDB')
     .subscribe((partner: any) => {
       try {
-        this.loadPartners( (data) => {
+        this.api.getPartners( (data) => {
           this.partnersTableDataSource.data = data;
         });
       } catch (err) {

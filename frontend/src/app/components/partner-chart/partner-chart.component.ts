@@ -6,6 +6,7 @@ import { DateAdapter } from '@angular/material';
 import { partition } from 'rxjs';
 import { FasDirective } from 'angular-bootstrap-md';
 import { WebsocketService } from '../../websocket.service';
+import { ApiService } from '../../api.service';
 
 
 @Component({
@@ -83,21 +84,11 @@ export class PartnerChartComponent implements OnInit {
     this.chart.update();
   }
 
-  loadChartData(callback) {
-    this.httpClient.get<Partner[]>('http://localhost:3000/partners').toPromise()
-    .then( data => {
-      callback(data);
-    })
-    .catch( err => {
-      throw err;
-    });
-  }
-
-  constructor(private httpClient: HttpClient, private ws: WebsocketService) { }
+  constructor(private api: ApiService, private ws: WebsocketService) { }
 
   ngOnInit() {
     try {
-      this.loadChartData( (data) => {
+      this.api.getPartners( (data) => {
         this.drawChart(data);
       });
     } catch (err) {
@@ -110,7 +101,7 @@ export class PartnerChartComponent implements OnInit {
     .onEvent('UpdateDB')
     .subscribe((partner: any) => {
       try {
-        this.loadChartData( (data) => {
+        this.api.getPartners( (data) => {
           this.updateChart(data);
         });
       } catch (err) {

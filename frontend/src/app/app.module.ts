@@ -14,10 +14,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {MatGridListModule} from '@angular/material/grid-list';
 
+import { ApiService } from './api.service';
 import { WebsocketService } from './websocket.service';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md';
 import { PartnerChartComponent } from './components/partner-chart/partner-chart.component';
 import { EmptyDatabaseComponent } from './components/empty-database/empty-database.component';
+
+import { environment } from './../environments/environment';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,7 @@ import { EmptyDatabaseComponent } from './components/empty-database/empty-databa
     WavesModule,
     MatGridListModule,
   ],
-  providers: [WebsocketService],
+  providers: [WebsocketService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
