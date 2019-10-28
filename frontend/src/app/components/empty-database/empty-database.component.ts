@@ -14,8 +14,7 @@ export class EmptyDatabaseComponent implements OnInit {
 
   async emptyDatabase() {
     try {
-      this.api.getPartners( (data) => {
-
+      this.api.deleteAllPartners( (data) => {
       });
     } catch (err) {
       alert(err);
