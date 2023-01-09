@@ -21,6 +21,6 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
-    "serverless-offline": "^5.12.0"
+    "serverless-offline": "^12.0.4"
   }
 }
